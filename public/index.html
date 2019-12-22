@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <title>React App | Entry point</title>
+  </head>
+
+  <body>
+    <noscript> You need to enable JavaScript to run this app. </noscript>
+    <button id="setup_button" style="position:absolute;bottom:0;left:20px;">Installer</button>
+    <div id="root"></div>
+    <script>
+        if('serviceWorker' in	navigator)	
+        {
+          navigator.serviceWorker.register('./reactapp.sw.js').then( registration => {
+            console.log('ServiceWorker registrado com sucesso !', registration)
+          })
+          .catch( err => console.log('Erro no registro:	',	err) )
+        }
+
+        let deferredPrompt
+        const setupButton = document.getElementById("setup_button")
+
+        window.addEventListener('beforeinstallprompt', e => {
+          e.preventDefault()
+          deferredPrompt = e
+          console.log("beforeinstallprompt fired")
+          setupButton.style.display = 'block'
+        })
+
+        setupButton.addEventListener('click', () => {
+          deferredPrompt.prompt()
+          
+          deferredPrompt.userChoice.then( choiceResult => {
+            console.log( `PWA setup ${ (choiceResult.outcome === 'accepted') ? 'accepted' : 'rejected' }` )
+            deferredPrompt = null
+          })
+        })
+
+        window.addEventListener('appinstalled', evt => console.log("appinstalled", evt) )
+    </script>
+  </body>
+</html>

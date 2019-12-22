@@ -1,0 +1,21 @@
+{
+  "short_name": "App",
+  "name": "App",
+  "icons": [
+      {
+          "src": "favicon.png",
+          "sizes": "144x144 64x64 32x32 24x24 16x16",
+          "type": "image/png"
+      },
+      {
+          "src": "splash.png",
+          "sizes": "512x512 192x192",
+          "type": "image/png"
+      }
+  ],
+  "prefer_related_applications": false,
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "theme_color": "#2c80b9",
+  "background_color": "#2c80b9"
+}
