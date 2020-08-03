@@ -1,30 +1,28 @@
 import React, { useEffect, useState } from "react"
 
-/* REDUX */
-import { useDispatch } from 'react-redux'
-
 import { TextField, Button, Grid, Snackbar } from '@material-ui/core'
 import { useHistory } from "react-router-dom"
 
-
+import {doLogin} from '../../services/api/system'
 
 const Login = () => {
-    const history         = useHistory()
-    let [user, setUser]   = useState({ name:"", email:"" })
     const [snackbar, setSnackbar] = useState({message:'', visible:false})
-    const action          = useDispatch()
+    const history       = useHistory()
+    let [user, setUser] = useState({ name:"", email:"" })
 
     useEffect( () => {
-        console.log("Component carregado")
-        return () => console.log("componente morreu")
+        console.log("Login carregado")
+        return () => console.log("Login morreu")
     }, [])
 
-    const logar = () => {
+    const logar = async () => {
         if( !user.name || !user.email )return setSnackbar({message:'Informe os dados corretamente', visible:true})
-        action({ type:'ADD_USER', usuario: { name:"soriano", email:"soriano@soriano.com" } })
-        history.push('/app')
+        
+        if( await doLogin( user ) )
+        {
+            history.push('/app')
+        }
     }
-
 
     return (
         <Grid container spacing={3}>
@@ -48,7 +46,7 @@ const Login = () => {
             </Grid>
 
             <Grid item xs={12}>
-                <Button variant="contained" color="primary" onClick={ () => logar() }> Entrar </Button>
+                <Button variant="contained" color="primary" onClick={ logar }> Entrar </Button>
             </Grid>
         </Grid>
     )

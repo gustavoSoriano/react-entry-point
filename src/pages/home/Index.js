@@ -3,8 +3,9 @@ import { useHistory } from "react-router-dom"
 import styled from 'styled-components'
 
 /* REDUX */
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
+import {doLogout} from '../../services/api/system'
 
 const ButtonCustom = styled.button`
     border: 1px solid #ccc;
@@ -18,18 +19,19 @@ const ButtonCustom = styled.button`
 
 const Home = () => {
     let usuario   = useSelector( state => state.usuario )
-    const action  = useDispatch()
+    let system    = useSelector( state => state.system )
     const history = useHistory()
 
     const sair = () => {
-        action({type:'ADD_USER', usuario: {name:'', email:''} })
+        doLogout()
         history.push('/')
     }
 
     return (
         <>
-            <h1>Hello World {JSON.stringify(usuario)}</h1>
-            <ButtonCustom onClick={ () => sair() }> Sair </ButtonCustom>
+            <h1>{JSON.stringify(usuario)}</h1>
+            <h1>{system.jwt}</h1>
+            <ButtonCustom onClick={ sair }> Sair </ButtonCustom>
         </>
     )
 }
