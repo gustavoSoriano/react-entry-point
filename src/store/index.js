@@ -1,19 +1,14 @@
-import { createStore } from 'redux'
-import INITIAL_STATE from './modules/index'
 
-const reducer = ( state = INITIAL_STATE, action ) =>  {
-    switch(action.type)
-    {
-        case 'ADD_USER':
-            return { ...state, usuario: action.usuario }
-           
-        case 'ADD_SYSTEM':
-            return { ...state, system: action.system }
+import createSagaMiddleware from 'redux-saga'
 
-        default:
-            return state
-    }
-}
+import createStore from './createStore'
+import rootReducer from './modules/rootReducer'
+import rootSaga from './modules/rootSaga'
 
-const store = createStore(reducer)
-export default store
+const sagaMiddleware = createSagaMiddleware()
+const middlewares    = [sagaMiddleware]
+
+const store = createStore(rootReducer, middlewares)
+sagaMiddleware.run(rootSaga)
+window.store = store
+export { store }

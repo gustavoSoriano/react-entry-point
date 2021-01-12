@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 import { TextField, Button, Grid, Snackbar } from '@material-ui/core'
 import { useHistory } from "react-router-dom"
 
-import {doLogin} from '../../services/api/system'
+import {doLogin} from '../../services/system'
 
 const Login = () => {
     const [snackbar, setSnackbar] = useState({message:'', visible:false})
