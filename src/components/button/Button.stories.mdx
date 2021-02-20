@@ -1,0 +1,34 @@
+<!--- Button.stories.mdx --->
+
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import Button from './Button';
+
+<Meta 
+    title="Documentação/Button" 
+    component={Button} 
+    argTypes={{ 
+        title: { control: 'text' } ,
+        onClick: { action: 'onClick' },
+    }} 
+/>
+
+
+# Documentação do componente Button
+
+export const Template = args => <Button title={args.title} onClick={ () => args.onClick("Clicou em confirmar") } />
+
+### Botão Confirmar
+<Canvas>
+    <Story name="Confirmar" args={{ title: 'Confirmar' }}>
+        {Template.bind({})}
+    </Story>
+</Canvas>
+
+### Botão Cancelar
+<Canvas>
+    <Story name="Cancelar" args={{ title: 'Cancelar' }}>
+        {Template.bind({})}
+    </Story>
+</Canvas>
+
+![Metrics](https://metrics.lecoq.io/gustavosoriano)

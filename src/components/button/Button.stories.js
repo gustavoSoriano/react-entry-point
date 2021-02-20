@@ -7,7 +7,7 @@ const story = {
   title: 'Components/Button',
   component: Button,
   argTypes: {
-    title: { constrol:{ type: 'text' } },
+    title: { control:{ type: 'text' } },
     onClick: { action: 'onClick' },
   },
 };
