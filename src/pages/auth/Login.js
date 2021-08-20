@@ -20,7 +20,7 @@ const Login = () => {
         
         if( await doLogin( user ) )
         {
-            history.push('/app')
+            history.push('/')
         }
     }
 

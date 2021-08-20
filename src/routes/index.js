@@ -1,17 +1,16 @@
 import React from "react"
-import { BrowserRouter, Route, Switch } from "react-router-dom"
-import PrivateRoute from './Auth/index'
+import { BrowserRouter, Router } from "react-router-dom"
+import UserRouter from './profile/user/Index'
+import AdminRouter from './profile/admin/Index'
+import { createBrowserHistory } from 'history'
 
-import Home from '../pages/home/Index'
-import Login from '../pages/auth/Login'
+const ADMIN = false
 
 const Routes = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route exact path="/" component={() => <Login />} />
-      <PrivateRoute path="/app" component={() => <Home />} />
-    </Switch>
-  </BrowserRouter>
+    <BrowserRouter>
+        <Router history={createBrowserHistory()}>
+            {ADMIN ? <AdminRouter /> : <UserRouter />}
+        </Router>
+    </BrowserRouter>
 )
-
 export default Routes

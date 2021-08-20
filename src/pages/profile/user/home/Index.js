@@ -5,7 +5,7 @@ import styled from 'styled-components'
 /* REDUX */
 import { useSelector } from 'react-redux'
 
-import {doLogout} from '../../services/system'
+import {doLogout} from '../../../../services/system'
 
 const ButtonCustom = styled.button`
     border: 1px solid #ccc;
