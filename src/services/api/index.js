@@ -1,10 +1,8 @@
 import axios from 'axios'
 import { store } from '../../store/index'
 
-const {system} = store.getState()
-
 const api = axios.create({
-  baseURL: system.server
+  baseURL: 'https://jsonplaceholder.typicode.com'
 })
 
 api.interceptors.response.use( null, error => {

@@ -1,6 +1,6 @@
 const INITIAL_STATE = {
     jwt: '',
-    server: 'https://jsonplaceholder.typicode.com'
+    server: ''
 }
 
 export default ( state = INITIAL_STATE, action ) =>  {

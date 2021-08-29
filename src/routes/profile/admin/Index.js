@@ -1,30 +1,32 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { Switch, Redirect } from 'react-router-dom'
 import RouteWithLayout from '../../RouteWithLayout'
 
-import DefaultLayout from '../../layouts/Default/Index'
-import HomePage from '../../../pages/profile/admin/home/Index'
-import Login from '../../../pages/auth/Login'
+const HomePage      = lazy(() => import('../../../pages/profile/admin/home/Index'))
+const Login         = lazy(() => import('../../../pages/auth/Login'))
+const DefaultLayout = lazy(() => import('../../layouts/Default/Index'))
 
 const AdminRouter = () => (
-    <Switch>
-        <RouteWithLayout
-            component={HomePage}
-            exact={true}
-            isPrivate={true}
-            layout={DefaultLayout}
-            path="/"
-        />
+    <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+            <RouteWithLayout
+                component={HomePage}
+                exact={true}
+                isPrivate={true}
+                layout={DefaultLayout}
+                path="/"
+            />
 
-        <RouteWithLayout
-            component={Login}
-            exact={true}
-            isPrivate={false}
-            layout={DefaultLayout}
-            path="/login"
-        />
+            <RouteWithLayout
+                component={Login}
+                exact={true}
+                isPrivate={false}
+                layout={DefaultLayout}
+                path="/login"
+            />
 
-        <Redirect to="/not-found" />
-    </Switch>
+            <Redirect to="/not-found" />
+        </Switch>
+    </Suspense>
 )
 export default AdminRouter
