@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@cypress/react": "^5.10.0",
+    "@cypress/webpack-dev-server": "^1.6.0",
     "@storybook/addon-actions": "^6.1.11",
     "@storybook/addon-essentials": "^6.1.11",
     "@storybook/addon-links": "^6.1.11",
     "@storybook/node-logger": "^6.1.11",
     "@storybook/preset-create-react-app": "^3.1.5",
-    "@storybook/react": "^6.1.11"
+    "@storybook/react": "^6.1.11",
+    "cypress": "^8.3.1",
+    "webpack-dev-server": "^3.11.1"
   },
   "dependencies": {
     "@material-ui/core": "^4.8.0",
@@ -32,7 +36,11 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:ct": "cypress open-ct",
+    "cypress:ct-run": "cypress run-ct"
   },
   "browserslist": {
     "production": [
