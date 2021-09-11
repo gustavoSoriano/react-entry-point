@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react"
 
-import { TextField, Button, Grid, Snackbar } from '@material-ui/core'
+import { TextField, Grid, Snackbar } from '@material-ui/core'
 import { useHistory } from "react-router-dom"
 
 import {doLogin} from '../../services/system'
+
+import {Button} from "../../components/button/index"
 
 const Login = () => {
     const [snackbar, setSnackbar] = useState({message:'', visible:false})
@@ -31,7 +33,7 @@ const Login = () => {
                 onClose={() => setSnackbar({message:'', visible:false}) }
                 message={<span>{snackbar.message}</span>}
                 action={[ 
-                    <Button key="close" style={{color:'#fff'}} size="small" onClick={ () => setSnackbar({message:'', visible:false}) }>
+                    <Button key="close" size="small" onClick={ () => setSnackbar({message:'', visible:false}) }>
                         Fechar
                     </Button>
                 ]}
@@ -46,7 +48,7 @@ const Login = () => {
             </Grid>
 
             <Grid item xs={12}>
-                <Button variant="contained" color="primary" onClick={ logar }> Entrar </Button>
+                <Button onClick={ logar }> Entrar </Button>
             </Grid>
         </Grid>
     )
