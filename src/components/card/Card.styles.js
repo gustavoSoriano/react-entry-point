@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import CardContent from '@material-ui/core/CardContent';
+import Box from "@material-ui/core/Box";
 
-export const StyledCard = styled(CardContent).attrs( props => ({
-    className: `shadow radius-1 bg-white`
-}))`
-
-`;
+export const StyledCard = styled(Box).attrs((props) => ({
+    className: `shadow bg-white`,
+}))``;
