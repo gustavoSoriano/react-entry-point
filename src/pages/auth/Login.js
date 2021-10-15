@@ -1,56 +1,90 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 
-import { TextField, Grid, Snackbar } from '@material-ui/core'
-import { useHistory } from "react-router-dom"
+import { useRecoilState } from "recoil";
+import { system as systemAtom } from "../../store/system";
 
-import {doLogin} from '../../services/system'
+import { TextField, Grid, Snackbar } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
-import {Button} from "../../components/button/index"
+import { doLogin } from "../../services/system";
+
+import Button from "../../components/button/Index";
 
 const Login = () => {
-    const [snackbar, setSnackbar] = useState({message:'', visible:false})
-    const history       = useHistory()
-    let [user, setUser] = useState({ name:"", email:"" })
+    const [system, setSystem] = useRecoilState(systemAtom);
+    const [snackbar, setSnackbar] = useState({ message: "", visible: false });
+    const history = useHistory();
+    let [user, setUser] = useState({ name: "", email: "" });
 
-    useEffect( () => {
-        console.log("Login carregado")
-        return () => console.log("Login morreu")
-    }, [])
+    useEffect(() => {
+        if (system.usuario?.userId) {
+            history.push("/");
+        }
+    }, [system.usuario]);
+
+    useEffect(() => {
+        console.log("Login carregado");
+        return () => console.log("Login morreu");
+    }, []);
 
     const logar = async () => {
-        if( !user.name || !user.email )return setSnackbar({message:'Informe os dados corretamente', visible:true})
-        
-        if( await doLogin( user ) )
-        {
-            history.push('/')
+        if (!user.name || !user.email)
+            return setSnackbar({
+                message: "Informe os dados corretamente",
+                visible: true,
+            });
+
+        const u = await doLogin(user);
+        if (u.userId) {
+            setSystem({ ...system, usuario: u, jwt: window.btoa(u.userId) });
         }
-    }
+    };
 
     return (
         <Grid container spacing={3}>
             <Snackbar
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }} open={snackbar.visible} autoHideDuration={3000}
-                onClose={() => setSnackbar({message:'', visible:false}) }
+                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                open={snackbar.visible}
+                autoHideDuration={3000}
+                onClose={() => setSnackbar({ message: "", visible: false })}
                 message={<span>{snackbar.message}</span>}
-                action={[ 
-                    <Button key="close" size="small" onClick={ () => setSnackbar({message:'', visible:false}) }>
+                action={[
+                    <Button
+                        key="close"
+                        size="small"
+                        onClick={() =>
+                            setSnackbar({ message: "", visible: false })
+                        }
+                    >
                         Fechar
-                    </Button>
+                    </Button>,
                 ]}
             />
 
             <Grid item xs={12}>
-                <TextField label="Name" value={user.name} onChange={ e => setUser({ ...user, name: e.target.value })  } variant="filled"/>
+                <TextField
+                    label="Name"
+                    value={user.name}
+                    onChange={(e) => setUser({ ...user, name: e.target.value })}
+                    variant="filled"
+                />
             </Grid>
 
             <Grid item xs={12}>
-                <TextField label="E-mail" value={user.email} onChange={ e => setUser({ ...user, email: e.target.value }) } variant="filled"/>
+                <TextField
+                    label="E-mail"
+                    value={user.email}
+                    onChange={(e) =>
+                        setUser({ ...user, email: e.target.value })
+                    }
+                    variant="filled"
+                />
             </Grid>
 
             <Grid item xs={12}>
-                <Button onClick={ logar }> Entrar </Button>
+                <Button onClick={logar}> Entrar </Button>
             </Grid>
         </Grid>
-    )
-}
-export default Login
+    );
+};
+export default Login;

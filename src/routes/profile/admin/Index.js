@@ -9,23 +9,23 @@ const DefaultLayout = lazy(() => import('../../layouts/Default/Index'))
 const AdminRouter = () => (
     <Suspense fallback={<div>Loading...</div>}>
         <Switch>
-            <RouteWithLayout
-                component={HomePage}
-                exact={true}
-                isPrivate={true}
-                layout={DefaultLayout}
-                path="/"
-            />
+                <RouteWithLayout
+                    component={HomePage}
+                    exact={true}
+                    isPrivate={true}
+                    layout={DefaultLayout}
+                    path="/"
+                />
 
-            <RouteWithLayout
-                component={Login}
-                exact={true}
-                isPrivate={false}
-                layout={DefaultLayout}
-                path="/login"
-            />
+                <RouteWithLayout
+                    component={Login}
+                    exact={false}
+                    isPrivate={false}
+                    layout={DefaultLayout}
+                    path="/login"
+                />
 
-            <Redirect to="/not-found" />
+                <Redirect to="/not-found" />
         </Switch>
     </Suspense>
 )

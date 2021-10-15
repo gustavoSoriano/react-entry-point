@@ -3,8 +3,6 @@
 ```
   - PWA
   - Router
-  - Redux
-  - Redux Saga
   - Material-UI
   - Hooks
   - Auth Routes

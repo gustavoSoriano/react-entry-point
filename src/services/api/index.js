@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { store } from '../../store/index'
 
 const api = axios.create({
   baseURL: 'https://jsonplaceholder.typicode.com'
@@ -11,8 +10,7 @@ api.interceptors.response.use( null, error => {
 })
 
 api.interceptors.request.use( config => {
-    const {system} = store.getState()
-    //config.headers.common['Authorization'] = system.jwt
+    config.headers.common['Authorization'] = (() => sessionStorage.getItem("jwt"))()
     return config
 }, error => {
     console.log('ERROR api.interceptors.request ', error)

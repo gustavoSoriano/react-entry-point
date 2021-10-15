@@ -1,20 +1,26 @@
 import React, { useEffect } from "react"
-import {Provider} from 'react-redux'
+import { useRecoilState } from "recoil"
+import { system as systemAtom } from "./store/system"
+import { users as usersAtom } from "./store/users"
 import Routes from "./routes/index"
-import {store} from './store'
+
+import {getUsers} from './services/users'
 
 const App = () => {
+    const [system, setSystem] = useRecoilState(systemAtom)
+    const [users, setUsers] = useRecoilState(usersAtom)
+
     useEffect( () => {
-        const {system} = store.getState()
-        store.dispatch({ type:'@system/ADD_SYSTEM', system: {...system, jwt: sessionStorage.getItem("jwt")} })
-        store.dispatch({ type:'saga@users/GET_USERS' })
+        setSystem({...system, usuario: JSON.parse(sessionStorage.getItem("usuario")), jwt: sessionStorage.getItem("jwt")})
+        loadUsers()
     }, [])
 
-    return (
-        <Provider store={store} >
-            <Routes />
-        </Provider>
-    )
+    const loadUsers = async () => {
+        const {data} = await getUsers()
+        setUsers( data || [] )
+    }
+
+    return <Routes />
 }
 
 export default App

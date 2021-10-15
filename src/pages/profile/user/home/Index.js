@@ -2,10 +2,11 @@ import React from "react"
 import { useHistory } from "react-router-dom"
 import styled from 'styled-components'
 
-/* REDUX */
-import { useSelector } from 'react-redux'
+import { useRecoilValue, useRecoilState } from "recoil"
+import { system as systemAtom } from "../../../../store/system"
+import { users as usersAtom } from "../../../../store/users"
 
-import {doLogout} from '../../../../services/system'
+
 
 const ButtonCustom = styled.button`
     border: 1px solid #ccc;
@@ -18,18 +19,19 @@ const ButtonCustom = styled.button`
 `
 
 const Home = () => {
-    let usuario   = useSelector( state => state.usuario )
-    let system    = useSelector( state => state.system )
+    const [system, setSystem] = useRecoilState(systemAtom)
     const history = useHistory()
 
     const sair = () => {
-        doLogout()
+        sessionStorage.removeItem("jwt")
+        sessionStorage.removeItem("usuario")
+        setSystem({...system, usuario:{}, jwt: null})
         history.push('/')
     }
 
     return (
         <>
-            <h1>{JSON.stringify(usuario)}</h1>
+            <pre>{JSON.stringify(system.usuario, null, 2)}</pre>
             <h1>{system.jwt}</h1>
             <ButtonCustom onClick={ sair }> Sair </ButtonCustom>
         </>
