@@ -1,22 +1,17 @@
-import React, { Fragment } from 'react'
-import ReactDOM from 'react-dom'
-import { RecoilRoot } from "recoil"
-import App from './App'
-import Theme from './themes/index'
+import React from "react";
+import ReactDOM from "react-dom";
+import { RecoilRoot } from "recoil";
+import App from "./App";
+import Theme from "./themes/index";
+import { makeServer } from "./mock/server";
 
-const DynamicComponent = Theme[ window.localStorage.getItem('theme') || 'Default' ] || Fragment
+makeServer();
 
 ReactDOM.render(
     <RecoilRoot>
-        <DynamicComponent>
+        <Theme>
             <App />
-        </DynamicComponent>
+        </Theme>
     </RecoilRoot>,
     document.getElementById("root")
-)
-
-
-
-
-
-
+);

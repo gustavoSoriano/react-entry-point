@@ -34,9 +34,18 @@ const Login = () => {
                 visible: true,
             });
 
-        const u = await doLogin(user);
-        if (u.userId) {
-            setSystem({ ...system, usuario: u, jwt: window.btoa(u.userId) });
+        try {
+            const u = await doLogin(user);
+
+            if (u.userId) {
+                setSystem({
+                    ...system,
+                    usuario: u,
+                    jwt: window.btoa(u.userId),
+                });
+            }
+        } catch ({ message }) {
+            return setSnackbar({ message, visible: true });
         }
     };
 

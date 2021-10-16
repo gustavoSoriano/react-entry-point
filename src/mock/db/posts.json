@@ -1,0 +1,20 @@
+[
+    {
+        "userId": 1,
+        "id": "000223",
+        "title": "sunt aut facere repellat optio reprehenderit",
+        "body": "molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+    },
+    {
+        "userId": 2,
+        "id": "000543",
+        "title": "repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia sunt rem eveniet architecto"
+    },
+    {
+        "userId": 3,
+        "id": "000123",
+        "title": "sunt aut facere excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+    }
+]

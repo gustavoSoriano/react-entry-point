@@ -1,5 +1,5 @@
-import api from './api/index'
+import Axios from "axios";
 
 export const getUsers = async () => {
-    return await api('/todos')
-}
+    return await Axios.get(`todos`);
+};

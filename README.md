@@ -8,4 +8,6 @@
   - Auth Routes
   - Styled-Components
   - Storybook
+  - Cypress
+  - MirageJs
 ```
