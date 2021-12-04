@@ -4,11 +4,13 @@ import { system as systemAtom } from "./store/system";
 import { users as usersAtom } from "./store/users";
 import Routes from "./routes/index";
 
-import { getUsers } from "./services/users";
+import useUsersService from "./services/users/useUsersService";
 
 const App = () => {
     const [system, setSystem] = useRecoilState(systemAtom);
     const [users, setUsers] = useRecoilState(usersAtom);
+
+    const { response, CreateUser } = useUsersService();
 
     useEffect(() => {
         setSystem({
@@ -16,18 +18,14 @@ const App = () => {
             usuario: JSON.parse(sessionStorage.getItem("usuario")),
             jwt: sessionStorage.getItem("jwt"),
         });
-        loadUsers();
+
+        CreateUser({ userId: 1 }).then(console.log);
     }, []);
 
-    const loadUsers = async () => {
-        try {
-            const { data } = await getUsers();
-            console.log(data);
-            setUsers(data || []);
-        } catch ({ message }) {
-            console.log(message);
-        }
-    };
+    useEffect(() => {
+        console.log(response);
+        setUsers(response || []);
+    }, [response]);
 
     return <Routes />;
 };

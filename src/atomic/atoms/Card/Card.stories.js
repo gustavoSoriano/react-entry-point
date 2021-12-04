@@ -4,7 +4,7 @@ import ThemeContainer from "../../themes/default/index";
 import Box from "@material-ui/core/Box";
 
 const story = {
-    title: "Components/Card",
+    title: "Atoms/Card",
     component: Card,
     argTypes: {
         title: { control: { type: "text" } },

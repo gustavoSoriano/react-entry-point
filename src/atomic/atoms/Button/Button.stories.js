@@ -2,7 +2,7 @@ import React from "react";
 import Button from "./Index";
 
 const story = {
-    title: "Components/Button",
+    title: "Atoms/Button",
     component: Button,
     argTypes: {
         title: { control: { type: "text" } },

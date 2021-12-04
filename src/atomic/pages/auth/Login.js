@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 
 import { useRecoilState } from "recoil";
-import { system as systemAtom } from "../../store/system";
+import { system as systemAtom } from "../../../store/system";
 
 import { TextField, Grid, Snackbar } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
-import { doLogin } from "../../services/system";
+import useSystemService from "../../../services/useSystemService";
 
-import Button from "../../components/button/Index";
+import Button from "../../atoms/Button/Index";
 
 const Login = () => {
     const [system, setSystem] = useRecoilState(systemAtom);
     const [snackbar, setSnackbar] = useState({ message: "", visible: false });
     const history = useHistory();
     let [user, setUser] = useState({ name: "", email: "" });
+
+    const { doLogin } = useSystemService();
 
     useEffect(() => {
         if (system.usuario?.userId) {
