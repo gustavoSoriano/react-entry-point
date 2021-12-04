@@ -5,10 +5,10 @@
   - PWA
   - Router
   - Material-UI
-  - Hooks
+  - Custom Hooks
   - Auth Routes
   - Styled-Components
   - Storybook
-  - Cypress
+  - Cypress - e2e, TDD
   - MirageJs
 ```
