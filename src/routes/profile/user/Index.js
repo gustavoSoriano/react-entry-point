@@ -7,6 +7,7 @@ const HomePage = lazy(() =>
 );
 const Login = lazy(() => import("../../../atomic/pages/auth/Login"));
 const DefaultLayout = lazy(() => import("../../layouts/Default/Index"));
+const LoginLayout = lazy(() => import("../../layouts/Login/Index"));
 
 const UserRouter = () => (
     <Suspense fallback={<div>Loading...</div>}>
@@ -22,7 +23,7 @@ const UserRouter = () => (
             <RouteWithLayout
                 component={Login}
                 isPrivate={false}
-                layout={DefaultLayout}
+                layout={LoginLayout}
                 path="/login"
             />
 
