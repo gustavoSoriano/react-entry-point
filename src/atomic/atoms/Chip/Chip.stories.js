@@ -1,6 +1,6 @@
 import React from "react";
 import Chip from "./Index";
-import ThemeContainer from "../../themes/default/index";
+import ThemeContainer from "../../../themes/default/index";
 import Box from "@material-ui/core/Box";
 
 const story = {
